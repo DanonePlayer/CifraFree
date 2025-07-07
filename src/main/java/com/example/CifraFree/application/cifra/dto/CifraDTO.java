@@ -1,5 +1,7 @@
 package com.example.CifraFree.application.cifra.dto;
 
+import com.example.CifraFree.domain.cifra.entities.Cifra;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +22,32 @@ public class CifraDTO {
     private boolean published;
     private Long idCriador;
     private String observation;
+
+    public CifraDTO(Cifra cifra) {
+        this.id = cifra.getId();
+        this.title = cifra.getTitle();
+        this.lyrics = cifra.getLyrics();
+        this.chords = cifra.getChords();
+        this.tone = cifra.getTone();
+        this.artist = cifra.getArtist();
+        this.genre = cifra.getGenre();
+        this.published = cifra.isPublished();
+        this.idCriador = cifra.getIdCriador();
+        this.observation = cifra.getObservation();
+    }
+
+    public Cifra toEntity() {
+        return new Cifra(
+            this.id,
+            this.title,
+            this.lyrics,
+            this.chords,
+            this.tone,
+            this.artist,
+            this.genre,
+            this.published,
+            this.idCriador,
+            this.observation
+        );
+    }
 }

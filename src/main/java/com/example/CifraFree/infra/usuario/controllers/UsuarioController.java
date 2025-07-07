@@ -22,7 +22,7 @@ public class UsuarioController {
 
     @GetMapping("/list")
     public ResponseEntity<List<UsuarioDTO>> getAll() {
-        List<UsuarioDTO> usuarios = usuarioService.getAllClientesUseCase().execute();
+        List<UsuarioDTO> usuarios = usuarioService.getAllClientes();
         return ResponseEntity.ok(usuarios);
     }
     
