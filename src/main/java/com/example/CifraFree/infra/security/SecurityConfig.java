@@ -1,6 +1,9 @@
 package com.example.CifraFree.infra.security;
 
+import com.example.CifraFree.infra.security.jwt.CustomUserDetailsService;
 import com.example.CifraFree.infra.security.jwt.JwtAuthFilter;
+import com.example.CifraFree.infra.usuario.repositories.UsuarioRepository;
+
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.*;
@@ -11,10 +14,27 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 public class SecurityConfig {
+
+    private final UsuarioRepository usuarioRepository;
+
+    public SecurityConfig(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService(usuarioRepository);
+    }
+
+    @Bean
+    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
@@ -32,16 +52,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
-
-    @Bean
-    public UserDetailsService users() {
-        UserDetails user = User.withUsername("Carlos")
-            .password("{noop}123")
-            .roles("USER")
-            .build();
-        return new InMemoryUserDetailsManager(user);
+    public PasswordEncoder passwordEncoder() {
+        // Para senha em texto plano, use NoOpPasswordEncoder (não recomendado para produção)
+        return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 }
