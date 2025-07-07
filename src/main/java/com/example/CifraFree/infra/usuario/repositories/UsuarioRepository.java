@@ -1,6 +1,7 @@
 package com.example.CifraFree.infra.usuario.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,12 @@ public class UsuarioRepository implements IUsuarioRepository{
     public List<Usuario> getByName(String name) {
         List<UsuarioModel> models = this.jpaUsuarioRepository.findByName(name);
         return models.stream().map(UsuarioModel::toEntity).toList();
+    }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return this.jpaUsuarioRepository.findByEmail(email)
+                .map(UsuarioModel::toEntity);
     }
     
 }

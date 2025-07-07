@@ -1,9 +1,12 @@
 package com.example.CifraFree.infra.usuario.models;
 
 import com.example.CifraFree.domain.usuario.entities.Usuario;
+import com.example.CifraFree.infra.Enums.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,14 +36,19 @@ public class UsuarioModel {
     @Column(name = "senha", nullable = false)
     private String password;
 
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public UsuarioModel(Usuario usuario) {
         this.id = usuario.getId();
         this.name = usuario.getName();
         this.email = usuario.getEmail();
         this.password = usuario.getPassword();
+        this.role = usuario.getRole();
     }
     
     public Usuario toEntity() {
-        return new Usuario(this.id, this.name, this.email, this.password);
+        return new Usuario(this.id, this.name, this.email, this.password, this.role);
     }
 }

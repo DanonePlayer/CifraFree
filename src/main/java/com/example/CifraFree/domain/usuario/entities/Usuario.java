@@ -1,5 +1,7 @@
 package com.example.CifraFree.domain.usuario.entities;
 
+import com.example.CifraFree.infra.Enums.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,4 +12,5 @@ public class Usuario {
     private String name;
     private String email;
     private String password;
+    private Role role;
 }

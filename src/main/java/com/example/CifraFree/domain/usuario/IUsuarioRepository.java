@@ -1,6 +1,7 @@
 package com.example.CifraFree.domain.usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.CifraFree.domain.usuario.entities.Usuario;
 
@@ -11,4 +12,5 @@ public interface IUsuarioRepository {
     Usuario getById(Long id);
     List<Usuario> getAll();
     List<Usuario> getByName(String name);
+    Optional<Usuario> findByEmail(String email);
 }

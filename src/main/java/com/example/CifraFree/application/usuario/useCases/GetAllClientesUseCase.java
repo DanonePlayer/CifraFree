@@ -24,7 +24,8 @@ public class GetAllClientesUseCase implements IVoidUseCase<List<UsuarioDTO>> {
                         usuario.getId(),
                         usuario.getName(),
                         usuario.getEmail(),
-                        usuario.getPassword()
+                        usuario.getPassword(),
+                        usuario.getRole()
                 ))
                 .toList();
     }
