@@ -36,7 +36,7 @@ public class UsuarioModel {
     @Column(name = "senha", nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "funcao", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
