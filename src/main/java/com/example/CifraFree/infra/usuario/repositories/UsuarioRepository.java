@@ -29,6 +29,12 @@ public class UsuarioRepository implements IUsuarioRepository{
     }
 
     @Override
+    public Usuario save(Usuario usuario) {
+        UsuarioModel model = new UsuarioModel(usuario);
+        return this.jpaUsuarioRepository.save(model).toEntity();
+    }
+
+    @Override
     public void deleteById(Long id) {
         this.jpaUsuarioRepository.deleteById(id);
     }
