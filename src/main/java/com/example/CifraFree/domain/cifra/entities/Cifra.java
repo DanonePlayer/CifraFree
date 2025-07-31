@@ -1,5 +1,9 @@
 package com.example.CifraFree.domain.cifra.entities;
 
+import java.time.LocalDateTime;
+
+import com.example.CifraFree.domain.usuario.entities.Usuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,6 +18,11 @@ public class Cifra {
     private String artist;
     private String genre;
     private boolean published;
-    private Long idCriador;
     private String observation;
+    private Integer views;
+    private Integer likes;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean deleted;
+    private Usuario creator;
 }

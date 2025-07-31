@@ -1,6 +1,9 @@
 package com.example.CifraFree.application.cifra.dto;
 
+import java.time.LocalDateTime;
+
 import com.example.CifraFree.domain.cifra.entities.Cifra;
+import com.example.CifraFree.domain.usuario.entities.Usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +23,13 @@ public class CifraDTO {
     private String artist;
     private String genre;
     private boolean published;
-    private Long idCriador;
     private String observation;
+    private Integer views;
+    private Integer likes;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean deleted;
+    private Usuario creator;
 
     public CifraDTO(Cifra cifra) {
         this.id = cifra.getId();
@@ -32,8 +40,13 @@ public class CifraDTO {
         this.artist = cifra.getArtist();
         this.genre = cifra.getGenre();
         this.published = cifra.isPublished();
-        this.idCriador = cifra.getIdCriador();
         this.observation = cifra.getObservation();
+        this.views = cifra.getViews();
+        this.likes = cifra.getLikes();
+        this.createdAt = cifra.getCreatedAt();
+        this.updatedAt = cifra.getUpdatedAt();
+        this.deleted = cifra.isDeleted();
+        this.creator = cifra.getCreator();
     }
 
     public Cifra toEntity() {
@@ -46,8 +59,13 @@ public class CifraDTO {
             this.artist,
             this.genre,
             this.published,
-            this.idCriador,
-            this.observation
+            this.observation,
+            this.views,
+            this.likes,
+            this.createdAt,
+            this.updatedAt,
+            this.deleted,
+            this.creator
         );
     }
 }

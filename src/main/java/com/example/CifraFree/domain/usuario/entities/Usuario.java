@@ -1,5 +1,7 @@
 package com.example.CifraFree.domain.usuario.entities;
 
+import java.time.LocalDateTime;
+
 import com.example.CifraFree.infra.Enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -17,4 +19,8 @@ public class Usuario {
     private String email;
     private String password;
     private Role role;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean deleted = false;
+    private boolean active = true;
 }

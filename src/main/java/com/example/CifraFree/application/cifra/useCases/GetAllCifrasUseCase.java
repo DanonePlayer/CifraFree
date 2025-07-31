@@ -1,6 +1,7 @@
 package com.example.CifraFree.application.cifra.useCases;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.CifraFree.application.cifra.dto.CifraDTO;
 import com.example.CifraFree.domain.cifra.ICifraRepository;
@@ -17,18 +18,8 @@ public class GetAllCifrasUseCase implements IVoidUseCase<List<CifraDTO>>{
     @Override
     public List<CifraDTO> execute() {
         List<CifraDTO> cifras = cifraRepository.getAll().stream()
-            .map(cifra -> new CifraDTO(
-                cifra.getId(),
-                cifra.getTitle(),
-                cifra.getLyrics(),
-                cifra.getChords(),
-                cifra.getTone(),
-                cifra.getArtist(),
-                cifra.getGenre(),
-                cifra.isPublished(),
-                cifra.getIdCriador(),
-                cifra.getObservation()
-            )).toList();
+            .map(CifraDTO::new)
+            .collect(Collectors.toList());
 
         return cifras;
     }

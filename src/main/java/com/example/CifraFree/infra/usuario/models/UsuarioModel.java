@@ -1,5 +1,10 @@
 package com.example.CifraFree.infra.usuario.models;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import com.example.CifraFree.domain.usuario.entities.Usuario;
 import com.example.CifraFree.infra.Enums.Role;
 
@@ -21,6 +26,8 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE usuarios SET excluido = true WHERE id = ?")
+@SQLRestriction("excluido = false")
 @Table(name = "usuarios")
 public class UsuarioModel {
     @Id
@@ -39,6 +46,20 @@ public class UsuarioModel {
     @Column(name = "funcao", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+    
+    @Column(name = "data_criacao", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "data_atualizacao")
+    private LocalDateTime updatedAt;
+
+
+    @Column(name = "excluido", nullable = false)
+    private boolean deleted = false;
+
+    @Column(name = "ativo", nullable = false)
+    private boolean active = true;
+
 
     public UsuarioModel(Usuario usuario) {
         this.id = usuario.getId();
@@ -46,9 +67,13 @@ public class UsuarioModel {
         this.email = usuario.getEmail();
         this.password = usuario.getPassword();
         this.role = usuario.getRole();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.deleted = false;
+        this.active = true;
     }
     
     public Usuario toEntity() {
-        return new Usuario(this.id, this.name, this.email, this.password, this.role);
+        return new Usuario(this.id, this.name, this.email, this.password, this.role, this.createdAt, this.updatedAt, this.deleted, this.active);
     }
 }
