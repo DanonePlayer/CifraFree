@@ -37,7 +37,7 @@ public class CifraModel {
     @Column(name = "titulo", nullable = false)
     private String title;
 
-    @Column(name = "letra", nullable = false)
+    @Column(name = "letra", nullable = false, columnDefinition = "TEXT")
     private String lyrics;
 
     @Column(name = "acordes", nullable = false)

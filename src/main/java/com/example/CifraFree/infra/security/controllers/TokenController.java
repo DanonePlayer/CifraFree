@@ -44,7 +44,7 @@ public class TokenController {
         }
 
         var now = Instant.now();
-        var expiration = 300L;
+        var expiration = 30000L;
 
         var claims = JwtClaimsSet.builder()
                 .issuer("CifraFree")
