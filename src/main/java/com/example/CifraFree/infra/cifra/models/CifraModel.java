@@ -40,6 +40,9 @@ public class CifraModel {
     @Column(name = "letra", nullable = false, columnDefinition = "TEXT")
     private String lyrics;
 
+    @Column(name = "acordes_da_letra", nullable = false, columnDefinition = "TEXT")
+    private String lyricsChords;
+
     @Column(name = "acordes", nullable = false)
     private String chords;
 
