@@ -18,6 +18,7 @@ public class CifraDTO {
     private Long id;
     private String title;
     private String lyrics;
+    private String lyricsChords;
     private String chords;
     private String tone;
     private String artist;
@@ -26,6 +27,7 @@ public class CifraDTO {
     private String observation;
     private Integer views;
     private Integer likes;
+    private boolean favorite;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean deleted;
@@ -35,6 +37,7 @@ public class CifraDTO {
         this.id = cifra.getId();
         this.title = cifra.getTitle();
         this.lyrics = cifra.getLyrics();
+        this.lyricsChords = cifra.getLyricsChords();
         this.chords = cifra.getChords();
         this.tone = cifra.getTone();
         this.artist = cifra.getArtist();
@@ -43,6 +46,7 @@ public class CifraDTO {
         this.observation = cifra.getObservation();
         this.views = cifra.getViews();
         this.likes = cifra.getLikes();
+        this.favorite = cifra.isFavorite();
         this.createdAt = cifra.getCreatedAt();
         this.updatedAt = cifra.getUpdatedAt();
         this.deleted = cifra.isDeleted();
@@ -54,6 +58,7 @@ public class CifraDTO {
             this.id,
             this.title,
             this.lyrics,
+            this.lyricsChords,
             this.chords,
             this.tone,
             this.artist,
@@ -62,6 +67,7 @@ public class CifraDTO {
             this.observation,
             this.views,
             this.likes,
+            this.favorite,
             this.createdAt,
             this.updatedAt,
             this.deleted,

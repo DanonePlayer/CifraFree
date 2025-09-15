@@ -13,6 +13,7 @@ public class Cifra {
     private Long id;
     private String title;
     private String lyrics;
+    private String lyricsChords;
     private String chords;
     private String tone;
     private String artist;
@@ -21,6 +22,7 @@ public class Cifra {
     private String observation;
     private Integer views;
     private Integer likes;
+    private boolean favorite;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean deleted;

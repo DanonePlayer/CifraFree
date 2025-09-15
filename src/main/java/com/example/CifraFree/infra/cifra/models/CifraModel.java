@@ -71,6 +71,9 @@ public class CifraModel {
     @Column(name = "curtidas", nullable = false)
     private Integer likes = 0;
 
+    @Column(name = "Favorita", nullable = false)
+    private boolean favorite;
+
     @Column(name = "data_criacao", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -85,6 +88,7 @@ public class CifraModel {
         this.id = cifra.getId();
         this.title = cifra.getTitle();
         this.lyrics = cifra.getLyrics();
+        this.lyricsChords = cifra.getLyricsChords();
         this.chords = cifra.getChords();
         this.tone = cifra.getTone();
         this.artist = cifra.getArtist();
@@ -93,6 +97,7 @@ public class CifraModel {
         this.observation = cifra.getObservation();
         this.views = cifra.getViews();
         this.likes = cifra.getLikes();
+        this.favorite = cifra.isFavorite();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.deleted = false;
@@ -104,6 +109,7 @@ public class CifraModel {
             this.id,
             this.title,
             this.lyrics,
+            this.lyricsChords,
             this.chords,
             this.tone,
             this.artist,
@@ -112,6 +118,7 @@ public class CifraModel {
             this.observation,
             this.views,
             this.likes,
+            this.favorite,
             this.createdAt,
             this.updatedAt,
             this.deleted,
