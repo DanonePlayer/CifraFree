@@ -71,7 +71,7 @@ public class CifraModel {
     @Column(name = "curtidas", nullable = false)
     private Integer likes = 0;
 
-    @Column(name = "Favorita", nullable = false)
+    @Column(name = "favorita", nullable = false)
     private boolean favorite;
 
     @Column(name = "data_criacao", nullable = false, updatable = false)
