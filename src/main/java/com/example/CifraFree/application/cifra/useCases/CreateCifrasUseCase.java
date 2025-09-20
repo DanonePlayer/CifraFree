@@ -2,6 +2,9 @@ package com.example.CifraFree.application.cifra.useCases;
 
 import java.time.LocalDateTime;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+
 import com.example.CifraFree.application.cifra.dto.CifraDTO;
 import com.example.CifraFree.domain.cifra.ICifraRepository;
 import com.example.CifraFree.domain.cifra.entities.Cifra;
@@ -21,7 +24,9 @@ public class CreateCifrasUseCase implements IUseCase<CifraDTO, CifraDTO>{
 
 	@Override
 	public CifraDTO execute(CifraDTO input) {
-        Usuario creator = usuarioRepository.getById(input.getCreator().getId());
+        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        Long userId = Long.parseLong(authentication.getToken().getClaim("userId").toString());
+        Usuario creator = usuarioRepository.getById(userId);
         Cifra cifra = cifraRepository.create(new Cifra(
             input.getId(),
             input.getTitle(),

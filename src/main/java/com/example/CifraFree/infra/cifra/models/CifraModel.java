@@ -98,10 +98,10 @@ public class CifraModel {
         this.views = cifra.getViews();
         this.likes = cifra.getLikes();
         this.favorite = cifra.isFavorite();
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        this.deleted = false;
-        this.creator = new UsuarioModel();
+        this.createdAt = cifra.getCreatedAt();
+        this.updatedAt = cifra.getUpdatedAt();
+        this.deleted = cifra.isDeleted();
+        this.creator = new UsuarioModel(cifra.getCreator());
     }
 
     public Cifra toEntity() {
