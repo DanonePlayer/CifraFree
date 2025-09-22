@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,16 @@ public class CifraController {
     public ResponseEntity<List<CifraDTO>> getAll() {
         List<CifraDTO> cifras = cifraService.getAllCifras();
         return ResponseEntity.ok(cifras);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CifraDTO> getById(@PathVariable Long id) {
+        try {
+        CifraDTO cifra = cifraService.getCifraById(id);
+        return ResponseEntity.ok(cifra);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PostMapping("/create")

@@ -1,6 +1,7 @@
 package com.example.CifraFree.infra.cifra.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,10 +34,9 @@ public class CifraRepository implements ICifraRepository{
     }
 
     @Override
-    public Cifra getById(Long id) {
+    public Optional<Cifra> getById(Long id) {
         return this.jpaCifraRepository.findById(id)
-            .map(CifraModel::toEntity)
-            .orElse(null);
+            .map(CifraModel::toEntity);
     }
 
     @Override

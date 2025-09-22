@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.CifraFree.application.cifra.dto.CifraDTO;
 import com.example.CifraFree.application.cifra.useCases.CreateCifrasUseCase;
 import com.example.CifraFree.application.cifra.useCases.GetAllCifrasUseCase;
+import com.example.CifraFree.application.cifra.useCases.GetCifraByIdUseCase;
 import com.example.CifraFree.infra.cifra.repositories.CifraRepository;
 import com.example.CifraFree.infra.usuario.repositories.UsuarioRepository;
 
@@ -17,6 +18,8 @@ public class CifraService {
 
     private CreateCifrasUseCase createCifrasUseCase;
 
+    private GetCifraByIdUseCase getCifraByIdUseCase;
+
     private CifraRepository cifraRepository;
     private UsuarioRepository usuarioRepository;
 
@@ -25,7 +28,11 @@ public class CifraService {
         this.usuarioRepository = usuarioRepository;
         this.getAllCifrasUseCase = new GetAllCifrasUseCase(cifraRepository);
         this.createCifrasUseCase = new CreateCifrasUseCase(cifraRepository, usuarioRepository);
-
+        this.getCifraByIdUseCase = new GetCifraByIdUseCase(cifraRepository);
+    }
+    
+    public CifraDTO getCifraById(Long id) {
+        return getCifraByIdUseCase.execute(id).orElseThrow(() -> new RuntimeException("Cifra not found"));
     }
 
 
