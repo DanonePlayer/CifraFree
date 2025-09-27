@@ -47,8 +47,7 @@ public class CreateCifrasUseCase implements IUseCase<CifraDTO, CifraDTO>{
             creator
         ));
 
-        Cifra savedCifra = cifra;
-        return new CifraDTO(savedCifra);
+        return new CifraDTO(cifra);
 	}
 
 }

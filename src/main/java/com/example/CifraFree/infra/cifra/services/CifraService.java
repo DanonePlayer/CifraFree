@@ -8,6 +8,7 @@ import com.example.CifraFree.application.cifra.dto.CifraDTO;
 import com.example.CifraFree.application.cifra.useCases.CreateCifrasUseCase;
 import com.example.CifraFree.application.cifra.useCases.GetAllCifrasUseCase;
 import com.example.CifraFree.application.cifra.useCases.GetCifraByIdUseCase;
+import com.example.CifraFree.application.cifra.useCases.UpdateCifraUseCase;
 import com.example.CifraFree.infra.cifra.repositories.CifraRepository;
 import com.example.CifraFree.infra.usuario.repositories.UsuarioRepository;
 
@@ -20,6 +21,8 @@ public class CifraService {
 
     private GetCifraByIdUseCase getCifraByIdUseCase;
 
+    private UpdateCifraUseCase updateCifraUseCase;
+
     private CifraRepository cifraRepository;
     private UsuarioRepository usuarioRepository;
 
@@ -29,6 +32,7 @@ public class CifraService {
         this.getAllCifrasUseCase = new GetAllCifrasUseCase(cifraRepository);
         this.createCifrasUseCase = new CreateCifrasUseCase(cifraRepository, usuarioRepository);
         this.getCifraByIdUseCase = new GetCifraByIdUseCase(cifraRepository);
+        this.updateCifraUseCase = new UpdateCifraUseCase(cifraRepository);
     }
     
     public CifraDTO getCifraById(Long id) {
@@ -42,5 +46,9 @@ public class CifraService {
 
     public CifraDTO createCifra(CifraDTO cifraDTO) {
         return createCifrasUseCase.execute(cifraDTO);
+    }
+
+    public CifraDTO updateCifra(CifraDTO cifraDTO) {
+        return updateCifraUseCase.execute(cifraDTO);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,5 +43,11 @@ public class CifraController {
     public ResponseEntity<CifraDTO> create(@RequestBody CifraDTO cifraDTO) {
         CifraDTO createdCifra = cifraService.createCifra(cifraDTO);
         return new ResponseEntity<>(createdCifra, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<CifraDTO> update(@RequestBody CifraDTO cifraDTO) {
+        CifraDTO updatedCifra = cifraService.updateCifra(cifraDTO);
+        return ResponseEntity.ok(updatedCifra);
     }
 }
