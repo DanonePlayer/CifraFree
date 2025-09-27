@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 import com.example.CifraFree.application.cifra.dto.CifraDTO;
 import com.example.CifraFree.domain.cifra.ICifraRepository;
 import com.example.CifraFree.domain.cifra.entities.Cifra;
-import com.example.CifraFree.shared.IUseCase;
+import com.example.CifraFree.shared.IAuthorizationUseCase;
 
-public class UpdateCifraUseCase implements IUseCase<CifraDTO, CifraDTO> {
+public class UpdateCifraUseCase implements IAuthorizationUseCase<CifraDTO, CifraDTO> {
 
     private final ICifraRepository cifraRepository;
 
@@ -16,22 +16,21 @@ public class UpdateCifraUseCase implements IUseCase<CifraDTO, CifraDTO> {
     }
 
     @Override
-    public CifraDTO execute(CifraDTO input) {
+    public CifraDTO execute(CifraDTO input, Long userId) {
         if (input.getId() == null) {
-            throw new IllegalArgumentException("Cifra ID must not be null for update.");
+            throw new IllegalArgumentException("ID da cifra é obrigatório para atualização.");
         }
 
         var existingCifraOpt = cifraRepository.getById(input.getId());
         if (existingCifraOpt.isEmpty()) {
-            throw new RuntimeException("Cifra not found");
+            throw new RuntimeException("Cifra não encontrada.");
         }
 
-        // var existingCifracrea = existingCifraOpt.get();
-        // if (!existingCifracrea.getCreator().getId().equals(userId)) {
-        //     throw new SecurityException("Você não tem permissão para editar esta cifra.");
-        // }
-
         var existingCifra = existingCifraOpt.get();
+        if (!existingCifra.getCreator().getId().equals(userId)) {
+            throw new SecurityException("Você não tem permissão para editar esta cifra.");
+        }
+
         Cifra updatedCifra = cifraRepository.update(new Cifra(
             existingCifra.getId(),
             input.getTitle(),

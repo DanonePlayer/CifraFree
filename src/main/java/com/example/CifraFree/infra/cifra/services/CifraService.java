@@ -48,7 +48,7 @@ public class CifraService {
         return createCifrasUseCase.execute(cifraDTO);
     }
 
-    public CifraDTO updateCifra(CifraDTO cifraDTO) {
-        return updateCifraUseCase.execute(cifraDTO);
+    public CifraDTO updateCifra(CifraDTO cifraDTO, Long userId) {
+        return updateCifraUseCase.execute(cifraDTO, userId);
     }
 }

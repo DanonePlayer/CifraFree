@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,8 +47,12 @@ public class CifraController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<CifraDTO> update(@RequestBody CifraDTO cifraDTO) {
-        CifraDTO updatedCifra = cifraService.updateCifra(cifraDTO);
+    public ResponseEntity<CifraDTO> update(
+        @RequestBody CifraDTO cifraDTO,
+        JwtAuthenticationToken authentication) {
+        Long userId = Long.parseLong(authentication.getToken().getClaim("userId").toString());
+
+        CifraDTO updatedCifra = cifraService.updateCifra(cifraDTO, userId);
         return ResponseEntity.ok(updatedCifra);
     }
 }
